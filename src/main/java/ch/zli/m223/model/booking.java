@@ -17,7 +17,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Booking {
@@ -27,7 +27,7 @@ public class Booking {
 
     @ManyToMany
     @JoinTable(name = "booking_equipments", joinColumns = @JoinColumn(name = "booking_id"), inverseJoinColumns = @JoinColumn(name = "equipment_id"))
-    @JsonIgnoreProperties("bookings")
+    @JsonIgnore
     @Fetch(FetchMode.JOIN)
     private Set<Equipment> equipments;
 
@@ -43,7 +43,7 @@ public class Booking {
     private LocalDate date;
 
     @Column(nullable = false)
-    private boolean ganzerTag;
+    private boolean ganzertag;
 
     @Column(nullable = false)
     private Long buchungsnummer;
@@ -95,11 +95,11 @@ public class Booking {
     }
 
     public boolean isGanzerTag() {
-        return ganzerTag;
+        return ganzertag;
     }
 
     public void setGanzerTag(boolean ganzerTag) {
-        this.ganzerTag = ganzerTag;
+        this.ganzertag = ganzertag;
     }
 
     public Long getBuchungsnummer() {
