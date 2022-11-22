@@ -5,7 +5,9 @@ package ch.zli.m223.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -51,6 +53,15 @@ public class BookingController {
     public List<Booking> index() {
         return bookingService.getBookings();
     }
+
+    //Delete Booking
+    @Path("/delete/{id}")
+    @DELETE
+    @Operation(summary = "Deletes one booking.", description = "Deletes one booking.")
+    public void remove(@PathParam("id") int id) {
+        bookingService.deleteBooking(id);
+    }
+
 
 
 

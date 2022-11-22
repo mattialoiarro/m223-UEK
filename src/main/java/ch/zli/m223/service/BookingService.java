@@ -15,6 +15,7 @@ public class BookingService {
     @Inject
     private EntityManager entityManager;
 
+    //print 1 out
     @Transactional
     public Booking getBooking(int id) {
         var entity = entityManager.find(Booking.class, id);
@@ -22,16 +23,27 @@ public class BookingService {
 
     }
 
+    //create one
     @Transactional
     public Booking createBooking(Booking booking) {
         entityManager.persist(booking);
         return booking;
     }
 
+    //All bookings
     public List<Booking> getBookings() {
         var query = entityManager.createQuery("FROM Booking", Booking.class);
         return query.getResultList();
     }
+
+    //Delete one booking
+    @Transactional
+    public void deleteBooking(int id){
+        var query = entityManager.find(Booking.class, id);
+        entityManager.remove(query);
+    }
+
+    
 
     
 
