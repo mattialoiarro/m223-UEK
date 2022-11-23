@@ -106,8 +106,8 @@ public class Booking {
         return buchungsnummer;
     }
 
-    public void setBuchungsnummer(Long buchungsnummer) {
-        this.buchungsnummer = buchungsnummer;
+    public void setBuchungsnummer(Long i) {
+        this.buchungsnummer = i;
     }
 
     public String getText() {
