@@ -1,6 +1,7 @@
 package ch.zli.m223.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -48,5 +49,13 @@ public class AdminService {
         entityManager.persist(user);
         return user;
 
+    }
+
+    public Optional<User> findByEmail(String email) {
+        return entityManager
+                .createNamedQuery("User.findByEmail", User.class)
+                .setParameter("email", email)
+                .getResultStream()
+                .findFirst();
     }
 }

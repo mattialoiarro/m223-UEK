@@ -12,14 +12,14 @@ import javax.persistence.OneToMany;
 
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Room {
 
     @OneToMany
     @JoinColumn(name = "Room_id")
-    @JsonIgnoreProperties("Room")
+    @JsonIgnore
     private Set<Booking> bookings;
 
 
