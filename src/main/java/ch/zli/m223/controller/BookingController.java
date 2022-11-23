@@ -30,7 +30,7 @@ public class BookingController {
 
     //Give back 1 booking
     @RolesAllowed({"Admin","Member"})
-    @Path("/{id}")
+    @Path("/booking/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(summary = "One Booking", description = "Gives back one booking")

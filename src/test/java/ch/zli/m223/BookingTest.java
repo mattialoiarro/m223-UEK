@@ -2,14 +2,9 @@ package ch.zli.m223;
 
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
-import io.vertx.core.cli.annotations.Description;
-
-import org.h2.engine.User;
 import org.junit.jupiter.api.Test;
 
 import com.google.inject.Inject;
-
-import ch.zli.m223.model.Booking;
 
 import static io.restassured.RestAssured.given;
 
@@ -35,7 +30,6 @@ public class BookingTest {
            
 
     }
-   
     @Test
     public void DeleteBookingEndpoint() {
             given()
@@ -43,6 +37,31 @@ public class BookingTest {
                  .then()
                     .statusCode(401);
     }
+
+    @Test
+    public void testCreateUserSuccess() {
+        given().header("Authorization", "Bearer " + adminT)
+                .contentType(ContentType.JSON)
+                .body("{\"prename\":\"test\",\"surname\":\"test\",\"email\":\"test@gmail.gmail\",\"password\":\"test\",\"role\":{\"id\":1}}")
+                .when().post("http://localhost:8080/admin/member")
+                .then()
+                .statusCode(200);
+    }
+
+    public void testEditBookingEndpointSuccess() {
+      given().header("Authorization", "Bearer " + adminT)
+              .contentType(ContentType.JSON)
+              .body(
+                      "{\"date\":\"2022-11-24\",\"ganzertag\":\"true\",\"buchungsnummer\":\"14154134\",\"text\"status\":\"awaiting approval\"room\":{\"id\":2},\"user\":{\"id\":2}}")
+              .when().put("http://localhost:8080/admin/booking/edit")
+              .then()
+              .statusCode(200);
+  }
+
+
+
+
+
 
     
 

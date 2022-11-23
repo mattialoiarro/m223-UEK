@@ -53,7 +53,7 @@ public class User {
     }
 
     @Column
-    private boolean isAdmin;
+    private boolean isadmin;
 
     
 
@@ -110,11 +110,11 @@ public class User {
     }
 
     public boolean isAdmin() {
-        return isAdmin;
+        return isadmin;
     }
 
-    public void setAdmin(boolean isAdmin) {
-        this.isAdmin = isAdmin;
+    public void setAdmin(boolean isadmin) {
+        this.isadmin = isadmin;
     }
 
     
