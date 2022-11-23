@@ -17,6 +17,26 @@ public class AuthTest {
                 .statusCode(200);
     }
 
+    @Test
+    public void testRegiSuccsess() {
+        given().contentType(ContentType.JSON)
+          .body("{\"prename\":\"test\",\"surname\":\"test\",\"email\":\"test@gmail.com\",\"password\":\"test\",\"role\":{\"id\":9}}")
+          .when().post("http://localhost:8080/session")
+          .then()
+             .statusCode(200);
+    }
+
+    @Test
+    public void LoginFailedEndpoint(){
+        String password = "854285";
+        String email = "tobias.bertschi@lernende.bbw.ch";
+
+        given()
+            .when().post("/session/" + email + "/" + password )
+            .then()
+                .statusCode(404);
+    }
+
 
   
 

@@ -36,6 +36,13 @@ public class BookingTest {
 
     }
    
+    @Test
+    public void DeleteBookingEndpoint() {
+            given()
+                 .when().delete("http://localhost:8080/booking/delete/" + 1)
+                 .then()
+                    .statusCode(401);
+    }
 
     
 
