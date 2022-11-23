@@ -52,6 +52,11 @@ public class User {
         return id;
     }
 
+    @Column
+    private boolean isAdmin;
+
+    
+
     public void setId(int id) {
         this.id = id;
     }
@@ -86,6 +91,30 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(Set<Booking> bookings) {
+        this.bookings = bookings;
+    }
+
+    public Rollen getRole() {
+        return role;
+    }
+
+    public void setRole(Rollen role) {
+        this.role = role;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
     

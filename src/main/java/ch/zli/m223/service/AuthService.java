@@ -25,7 +25,7 @@ public class AuthService {
     Optional<User> user = adminService.findByEmail(credential.getEmail());
 
     try {
-      if (user.isPresent() && user.get().getPassword().equals(credential.getPassword())) {
+      if (user.isPresent() && user.get().getPassword().equals(credential.getPassword()) && user.get().isAdmin() == true) {
         String token = Jwt
             .issuer("https://zli.example.com/")
             .upn(credential.getEmail())
@@ -34,14 +34,26 @@ public class AuthService {
             .sign();
         return Response
             .ok(user.get())
-            .cookie(new NewCookie("punchclock", token))
             .header("Authorization", "Bearer " + token)
             .build();
+      }else if(user.isPresent() && user.get().getPassword().equals(credential.getPassword()) && user.get().isAdmin() == false) {
+        String token = Jwt
+                .issuer("https://zli.example.com/")
+                .upn(credential.getEmail())
+                .groups(new HashSet<>(Arrays.asList("Member")))
+                .expiresIn(Duration.ofHours(24))
+                .sign();
+        return Response
+                .ok(user.get())
+                .header("Authorization", "Bearer " + token)
+                .build();
+          }
+      }catch (Exception e) {
+        System.err.println("Couldn't validate password.");
       }
-    } catch (Exception e) {
-      System.err.println("Couldn't validate password.");
-    }
+    
 
     return Response.status(Response.Status.FORBIDDEN).build();
+    }
   }
-}
+

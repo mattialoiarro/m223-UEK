@@ -2,6 +2,7 @@ package ch.zli.m223.controller;
 
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -36,6 +37,7 @@ public class AdminController {
     }
 
     //Create new user
+    @RolesAllowed("Admin")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -45,6 +47,7 @@ public class AdminController {
     }
 
     //Delete booking
+    @RolesAllowed({"Admin", "Member"})
     @Path("/booking/{id}")
     @DELETE
     @Operation(summary = "Deletes one booking.", description = "Deletes one booking.")
@@ -53,6 +56,7 @@ public class AdminController {
     }
 
     //Delete user
+    @RolesAllowed("Admin")
     @Path("/user/{id}")
     @DELETE
     @Operation(summary = "Deletes one user.", description = "Deletes one user.")
@@ -61,6 +65,7 @@ public class AdminController {
     }
 
     //User update
+    @RolesAllowed("Admin")
     @PUT
     @Path("/user/{id}")
     @Produces(MediaType.APPLICATION_JSON)

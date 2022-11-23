@@ -4,6 +4,7 @@ package ch.zli.m223.controller;
 
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -28,6 +29,7 @@ public class BookingController {
     BookingService bookingService;
 
     //Give back 1 booking
+    @RolesAllowed({"Admin","Member"})
     @Path("/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -37,6 +39,7 @@ public class BookingController {
     }
 
     //Create bookings
+    @RolesAllowed({"Admin","Member"})
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -46,6 +49,7 @@ public class BookingController {
     }
 
     //Gives every booking back
+    @RolesAllowed("Admin")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(summary = "All bookings", description = "Gives every booking back")
@@ -54,6 +58,7 @@ public class BookingController {
     }
 
     //Delete Booking
+    @RolesAllowed({"Admin","Member"})
     @Path("/delete/{id}")
     @DELETE
     @Operation(summary = "Deletes one booking.", description = "Deletes one booking.")
